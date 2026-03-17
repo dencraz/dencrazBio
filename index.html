@@ -8,7 +8,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    * { cursor: none !important; }
 
     :root {
       --bg: #0a0a0f;
@@ -188,27 +187,7 @@
       opacity: 0.6;
     }
 
-    /* CURSOR */
-    .cursor {
-      width: 8px; height: 8px;
-      background: var(--accent);
-      border-radius: 50%;
-      position: fixed;
-      pointer-events: none;
-      z-index: 10000;
-      transition: transform 0.15s ease;
-      transform: translate(-50%, -50%);
-    }
-    .cursor-ring {
-      width: 32px; height: 32px;
-      border: 1px solid rgba(200, 255, 0, 0.35);
-      border-radius: 50%;
-      position: fixed;
-      pointer-events: none;
-      z-index: 10000;
-      transform: translate(-50%, -50%);
-      transition: left 0.12s ease, top 0.12s ease, width 0.2s ease, height 0.2s ease;
-    }
+
 
     /* NAV */
     nav {
@@ -878,9 +857,6 @@
 
 <canvas id="bg-canvas"></canvas>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
-
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">den<span>.</span>craz</a>
@@ -1466,19 +1442,7 @@
   document.body.style.overflow = 'hidden';
   runPreloader();
 
-  // ── CURSOR ─────────────────────────────────────────────
-  const cursor = document.getElementById('cursor');
-  const ring   = document.getElementById('cursorRing');
-  document.addEventListener('mousemove', e => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top  = e.clientY + 'px';
-    ring.style.left   = e.clientX + 'px';
-    ring.style.top    = e.clientY + 'px';
-  });
-  document.querySelectorAll('a, button').forEach(el => {
-    el.addEventListener('mouseenter', () => cursor.style.transform = 'translate(-50%,-50%) scale(2.5)');
-    el.addEventListener('mouseleave', () => cursor.style.transform = 'translate(-50%,-50%) scale(1)');
-  });
+
 
   // ── MAGNETIC BUTTONS ──────────────────────────────────
   document.querySelectorAll('.hero-cta, .hero-cta-ghost').forEach(btn => {
