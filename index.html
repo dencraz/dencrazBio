@@ -1465,5 +1465,32 @@
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
+
+<!-- ═══════════════════════════════════════════════════
+     VISITOR TRACKER — уведомляет тебя в Telegram
+     Замени TRACKER_URL на свой ngrok/хостинг адрес
+     ═══════════════════════════════════════════════════ -->
+<script>
+(function () {
+  // ⬇️ Замени на URL своего сервера (ngrok / хостинг)
+  const TRACKER_URL = "https://sitenotificationbot.onrender.com/";
+
+  try {
+    fetch(TRACKER_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        page:      window.location.href,
+        referrer:  document.referrer,
+        userAgent: navigator.userAgent,
+        screen:    screen.width + "×" + screen.height,
+        language:  navigator.language,
+      }),
+      // не ждём ответа и не блокируем страницу
+      keepalive: true,
+    }).catch(() => {/* тихо игнорируем ошибку */});
+  } catch (e) { /* silent fail */ }
+})();
+</script>
 </body>
 </html>
